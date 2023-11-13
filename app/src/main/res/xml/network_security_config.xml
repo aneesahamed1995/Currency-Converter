@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">api.apilayer.com</domain>
+        <pin-set expiration="2024-05-06">
+            <pin digest="SHA-256">jKx/K3o0EaswUsjM80WKm89ukEkIH8ZVlVJ6daRaIyg=</pin>
+           </pin-set>
+        <trustkit-config enforcePinning="true"/>
+    </domain-config>
+</network-security-config>
+

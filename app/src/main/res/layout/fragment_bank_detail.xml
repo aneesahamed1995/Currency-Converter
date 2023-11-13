@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="bankData"
+            type="com.kfh.converter.view.model.BankUiState" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/ivValid"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_valid"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvValidIban"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/valid_iban"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/ivValid" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/formGuideLine"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".4"
+            app:layout_constraintTop_toBottomOf="@id/tvValidIban"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvIbanHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/formGuideLine"
+            app:layout_constraintTop_toBottomOf="@id/tvValidIban"
+            android:layout_marginTop="24dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="@string/iban"/>
+
+        <TextView
+            android:id="@+id/tvIban"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:text="@{bankData.iban}"
+            app:layout_constraintTop_toTopOf="@id/tvIbanHint"
+            app:layout_constraintStart_toEndOf="@id/formGuideLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            tools:text="7686786dhkjhd879789798"/>
+
+        <TextView
+            android:id="@+id/tvCountryHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/formGuideLine"
+            app:layout_constraintTop_toBottomOf="@id/tvIban"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="@string/country"/>
+
+        <TextView
+            android:id="@+id/tvCountry"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:text="@{bankData.country}"
+            app:layout_constraintTop_toTopOf="@id/tvCountryHint"
+            app:layout_constraintStart_toEndOf="@id/formGuideLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            tools:text="7686786dhkjhd879789798"/>
+
+        <TextView
+            android:id="@+id/tvCheckSumHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/formGuideLine"
+            app:layout_constraintTop_toBottomOf="@id/tvCountry"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="@string/check_sum"/>
+
+        <TextView
+            android:id="@+id/tvCheckSum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:text="@{bankData.checksum}"
+            app:layout_constraintTop_toTopOf="@id/tvCheckSumHint"
+            app:layout_constraintStart_toEndOf="@id/formGuideLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            tools:text="7686786dhkjhd879789798"/>
+
+        <TextView
+            android:id="@+id/tvBankCodeHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/formGuideLine"
+            app:layout_constraintTop_toBottomOf="@id/tvCheckSum"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="@string/bank_code"/>
+
+        <TextView
+            android:id="@+id/tvBankCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:text="@{bankData.bankCode}"
+            app:layout_constraintTop_toTopOf="@id/tvBankCodeHint"
+            app:layout_constraintStart_toEndOf="@id/formGuideLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            tools:text="7686786dhkjhd879789798"/>
+
+        <TextView
+            android:id="@+id/tvAccountNoHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/formGuideLine"
+            app:layout_constraintTop_toBottomOf="@id/tvBankCodeHint"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="@string/account_number"/>
+
+        <TextView
+            android:id="@+id/tvAccountNo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:text="@{bankData.accountNumber}"
+            app:layout_constraintTop_toTopOf="@id/tvAccountNoHint"
+            app:layout_constraintStart_toEndOf="@id/formGuideLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            tools:text="7686786dhkjhd879789798"/>
+
+        <TextView
+            android:id="@+id/tvNameHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/formGuideLine"
+            app:layout_constraintTop_toBottomOf="@id/tvAccountNo"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="@string/name"/>
+
+        <TextView
+            android:id="@+id/tvBank"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:text="@{bankData.name}"
+            app:layout_constraintTop_toTopOf="@id/tvNameHint"
+            app:layout_constraintStart_toEndOf="@id/formGuideLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            tools:text="7686786dhkjhd879789798"/>
+
+        <TextView
+            android:id="@+id/tvCityHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/formGuideLine"
+            app:layout_constraintTop_toBottomOf="@id/tvBank"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="@string/city"/>
+
+        <TextView
+            android:id="@+id/tvCity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:text="@{bankData.city}"
+            app:layout_constraintTop_toTopOf="@id/tvCityHint"
+            app:layout_constraintStart_toEndOf="@id/formGuideLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            tools:text="7686786dhkjhd879789798"/>
+
+        <TextView
+            android:id="@+id/tvZipHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/formGuideLine"
+            app:layout_constraintTop_toBottomOf="@id/tvCity"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="@string/zip"/>
+
+        <TextView
+            android:id="@+id/tvZip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:text="@{bankData.zip}"
+            app:layout_constraintTop_toTopOf="@id/tvZipHint"
+            app:layout_constraintStart_toEndOf="@id/formGuideLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            tools:text="7686786dhkjhd879789798"/>
+
+        <TextView
+            android:id="@+id/tvBicHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/formGuideLine"
+            app:layout_constraintTop_toBottomOf="@id/tvZip"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="@string/bic"/>
+
+        <TextView
+            android:id="@+id/tvBic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:text="@{bankData.bic}"
+            app:layout_constraintTop_toTopOf="@id/tvBicHint"
+            app:layout_constraintStart_toEndOf="@id/formGuideLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
+            tools:text="7686786dhkjhd879789798"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
