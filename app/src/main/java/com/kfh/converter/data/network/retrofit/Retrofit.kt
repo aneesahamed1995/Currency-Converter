@@ -19,9 +19,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-var certificatePinner: CertificatePinner = CertificatePinner.Builder()
-    .add("www.api.apilayer.com", "sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=")
-    .build()
 fun provideOkHttpClient(
     httpLoggerInterceptor: Interceptor,
     headerInterceptor: Interceptor
@@ -31,7 +28,6 @@ fun provideOkHttpClient(
     writeTimeout(30, TimeUnit.SECONDS)
     addInterceptor(headerInterceptor)
     addInterceptor(httpLoggerInterceptor)
-    this.certificatePinner(certificatePinner)
     if (Build.VERSION.SDK_INT< Build.VERSION_CODES.N){
         sslSocketFactory(OkHttp3Helper.getSSLSocketFactory(), OkHttp3Helper.getTrustManager())
         addInterceptor(OkHttp3Helper.getPinningInterceptor())
