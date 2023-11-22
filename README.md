@@ -1,4 +1,4 @@
-ere are some key highlights of the project:
+Here are some key highlights of the project:
 
 MVVM-Clean Architecture:
 
