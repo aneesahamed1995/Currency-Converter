@@ -20,10 +20,10 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class com.kfh.converter.view.model.BankUiState{*;}
--keep class com.kfh.converter.view.model.CurrencyExchangeUiState{*;}
--keep class com.kfh.converter.domain.entity.** {*;}
--keep class com.kfh.converter.data.network.response** {*;}
+-keep class com.demo.converter.view.model.BankUiState{*;}
+-keep class com.demo.converter.view.model.CurrencyExchangeUiState{*;}
+-keep class com.demo.converter.domain.entity.** {*;}
+-keep class com.demo.converter.data.network.response** {*;}
 
 
 # Add project specific ProGuard rules here.
@@ -368,5 +368,7 @@
 -keep class android.support.v4.** { *; }
 -dontwarn android.support.v7.**
 -keep class android.support.v7.** { *; }
+
+-dontwarn com.google.devtools.ksp.processing.SymbolProcessorProvider
 
 

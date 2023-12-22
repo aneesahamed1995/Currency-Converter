@@ -4,10 +4,12 @@ kotlin = "1.9.0"
 core-ktx = "1.12.0"
 junit = "4.13.2"
 androidx-test-ext-junit = "1.1.5"
+com-google-devtools-ksp = "1.9.21-1.0.16"
 espresso-core = "3.5.1"
 appcompat = "1.6.1"
 material = "1.10.0"
 retrofit = "2.9.0"
+room = "2.5.1"
 viewmodel = "2.6.1"
 livedata = "2.6.1"
 lifecycle-runtime = "2.6.1"
@@ -25,6 +27,8 @@ androidxComposeBom = "2023.10.00"
 lifecycle-runtime-compose = "2.6.2"
 constraintlayout = "2.1.4"
 constraintlayout-compose = "1.0.1"
+navigation-compose = "2.7.6"
+moshi = "1.14.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -33,7 +37,8 @@ androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-retrofit = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
 lifecycle-viewModel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "viewmodel"}
 livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata", version.ref = "livedata"}
 lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime", version.ref = "lifecycle-runtime"}
@@ -53,6 +58,12 @@ androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-compose-constraint-layout = { group = "androidx.constraintlayout", name = "constraintlayout-compose" , version.ref = "constraintlayout-compose"}
 androidx-compose-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle-runtime-compose" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+room = { module = "androidx.room:room-ktx", version.ref = "room" }
+navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
+moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
+moshi-codegen = { group = "com.squareup.moshi" , name = "moshi-kotlin-codegen", version.ref = "moshi" }
 
 
 [plugins]
@@ -61,4 +72,5 @@ kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize",  version.ref = "kotlin"  }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation-safe-args" }
+com-google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "com-google-devtools-ksp" }
 

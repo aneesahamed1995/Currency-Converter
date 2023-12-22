@@ -3,11 +3,11 @@
     <data>
         <variable
             name="toolbarViewModel"
-            type="com.kfh.converter.view.base.ToolbarViewModel" />
+            type="com.demo.converter.view.base.ToolbarViewModel" />
 
         <variable
             name="toolbarListener"
-            type="com.kfh.converter.view.listener.ToolbarNavigationListener" />
+            type="com.demo.converter.view.listener.ToolbarNavigationListener" />
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -30,7 +30,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:elevation="4dp"
-                app:setToolbarVisibility="@{toolbarViewModel.toolbarTypeLiveData}"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,8 +41,6 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:scaleType="centerInside"
-                        app:navListener="@{toolbarListener}"
-                        app:setToolbarViewType="@{toolbarViewModel.toolbarTypeLiveData}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -57,8 +54,6 @@
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        app:setToolbarViewType="@{toolbarViewModel.toolbarTypeLiveData}"
-                        app:setToolbarTitle="@{toolbarViewModel.toolbarTitleLiveData}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

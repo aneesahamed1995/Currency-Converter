@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KFH Converter</string>
+    <string name="app_name">Pay Pay Converter</string>
     <string name="enter_iban">Enter IBAN</string>
     <string name="validate">Validate</string>
     <string name="kuwait_dinar">Kuwaiti Dinar (KWD)</string>
@@ -20,7 +20,7 @@
     <string name="zip">Zip:</string>
     <string name="bic">BIC:</string>
     <string name="select">Select</string>
-    <string name="no_exchange_rates_available">No Exchange available</string>
+    <string name="no_currencies_available">No Currencies found</string>
     <string name="please_enter_iban_no">Please Enter Iban</string>
     <string name="noConnectionTitle">No Internet Connection</string>
     <string name="something_went_wrong">Something went wrong.</string>

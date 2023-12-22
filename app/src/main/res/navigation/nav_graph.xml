@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/converterFragment"
-        android:name="com.kfh.converter.view.converter.ConverterFragment"
+        android:name="com.demo.converter.view.converter.ConverterFragment"
         tools:layout="@layout/fragment_converter">
         <action
             android:id="@+id/action_to_bank_detail_fragment"
@@ -29,11 +29,11 @@
 
     <fragment
         android:id="@+id/bankDetailFragment"
-        android:name="com.kfh.converter.view.bank_detail.BankDetailFragment"
+        android:name="com.demo.converter.view.bank_detail.BankDetailFragment"
         tools:layout="@layout/fragment_bank_detail">
         <argument
             android:name="bankData"
-            app:argType="com.kfh.converter.view.model.BankUiState"/>
+            app:argType="com.demo.converter.view.model.BankUiState"/>
         <argument
             android:name="toolBarViewType"
             android:defaultValue="1"
@@ -46,10 +46,10 @@
     </fragment>
     <fragment
         android:id="@+id/exchangeRateFragment"
-        android:name="com.kfh.converter.view.exchange_rate.ExchangeRatesFragment">
+        android:name="com.demo.converter.view.currency_list.ExchangeRatesFragment">
         <argument
             android:name="exchangeRate"
-            app:argType="com.kfh.converter.view.model.CurrencyExchangeUiState"
+            app:argType="com.demo.converter.view.model.CurrencyExchangeUiState"
             app:nullable="true"/>
         <argument
             android:name="toolBarViewType"

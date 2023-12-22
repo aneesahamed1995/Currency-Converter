@@ -3,17 +3,16 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.kotlin.parcelize)
-    alias(libs.plugins.kotlin.kapt)
+    //alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.navigation.safeargs)
+    alias(libs.plugins.com.google.devtools.ksp)
 }
 
 android {
-    namespace = "com.kfh.converter"
+    namespace = "com.demo.converter"
     compileSdk = 34
     buildFeatures {
         buildConfig = true
-        viewBinding = true
-        dataBinding = true
         compose = true
     }
 
@@ -22,7 +21,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.kfh.converter"
+        applicationId = "com.demo.converter"
         minSdk = 23
         targetSdk = 34
         versionCode = 1
@@ -66,6 +65,9 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.moshi)
+    implementation(libs.moshi)
+    implementation(libs.moshi.codegen)
     implementation(libs.lifecycle.viewModel)
     implementation(libs.viewmodel.savedstate)
     implementation(libs.livedata)
@@ -84,7 +86,12 @@ dependencies {
     implementation(libs.androidx.compose.material)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.constraint.layout)
+    implementation(libs.navigation.compose)
     implementation(libs.constraintlayout)
+    implementation(libs.room.runtime)
+    implementation(libs.room)
+    ksp(libs.room.compiler)
+    annotationProcessor(libs.room.compiler)
 
 
     testImplementation(libs.junit)

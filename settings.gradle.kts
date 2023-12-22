@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "KFH Converter"
+rootProject.name = "Pay Pay Converter"
 include(":app")

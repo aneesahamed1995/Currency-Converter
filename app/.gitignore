@@ -1,1 +1,27 @@
-/build
+# Gradle files
+.gradle/
+build/
+
+# IntelliJ
+*.iml
+.idea/
+
+# Version control
+vcs.xml
+
+# Built application files
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+out/
