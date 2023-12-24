@@ -4,7 +4,6 @@
     <string name="validate">Validate</string>
     <string name="kuwait_dinar">Kuwaiti Dinar (KWD)</string>
     <string name="currency_symbol_placeholder">%s (%s)</string>
-    <string name="exchange_rate_placeholder">Exchange Rate: %s</string>
     <string name="invalid_iban">Invalid IBAN</string>
     <string name="valid_iban">Valid IBAN</string>
     <string name="please_wait">Please Wait…</string>
@@ -14,16 +13,17 @@
     <string name="check_sum">CheckSum:</string>
     <string name="bank_code">Bank Code:</string>
     <string name="account_number">Account Number:</string>
-    <string name="exchange_rates">Exchange Rates</string>
     <string name="name">Name:</string>
     <string name="city">City:</string>
     <string name="zip">Zip:</string>
     <string name="bic">BIC:</string>
     <string name="select">Select</string>
     <string name="no_currencies_available">No Currencies found</string>
+    <string name="currencies">Currencies</string>
     <string name="please_enter_iban_no">Please Enter Iban</string>
     <string name="noConnectionTitle">No Internet Connection</string>
     <string name="something_went_wrong">Something went wrong.</string>
+    <string name="exchange_rate_placeholder">1 %s = %s %s</string>
     <string name="alert_message_not_able_to_connect_internet">Unable to connect to the internet.Please try again later</string>
 
 </resources>

@@ -15,8 +15,8 @@ interface BankApi{
 
 interface CurrencyApi{
     @GET(ApiEndPoint.GET_ALL_CURRENCY)
-    fun getAllCurrencies():ResultCall<CurrencyListResponse>
+    fun getAllCurrencies():ResultCall<Map<String,String>>
 
     @GET(ApiEndPoint.GET_EXCHANGE_RATE)
-    fun getExchangeRate(@Query("base") baseCurrency:String):ResultCall<ExchangeRateResponse>
+    fun getExchangeRate():ResultCall<ExchangeRateResponse>
 }

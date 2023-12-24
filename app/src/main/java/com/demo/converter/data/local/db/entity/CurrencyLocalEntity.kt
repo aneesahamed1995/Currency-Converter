@@ -9,7 +9,6 @@ import com.demo.converter.data.local.db.DbConstant
 @Entity(tableName = DbConstant.TableName.CURRENCY)
 data class CurrencyLocalEntity(
     @PrimaryKey @ColumnInfo(DbConstant.CurrencyTableColumn.NAME) var name: String = AppConstant.EMPTY,
-    @ColumnInfo(DbConstant.CurrencyTableColumn.CODE) var code: String = AppConstant.EMPTY,
-    @ColumnInfo(DbConstant.CurrencyTableColumn.LAST_SYNC_TIME) var lastSyncTime:Long = 0L
+    @ColumnInfo(DbConstant.CurrencyTableColumn.CODE) var code: String = AppConstant.EMPTY
 )
 

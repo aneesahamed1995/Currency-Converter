@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
 import com.demo.converter.common.AppConstant
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.Date
@@ -35,7 +37,7 @@ fun String?.toSafeDouble() = try {
     else 0.0
 }catch (ex:Exception){ 0.0 }
 
-fun Double.toFormattedDouble(): Double = DecimalFormat("#.##", DecimalFormatSymbols(Locale.ENGLISH)).format(this).toDouble()
+fun Double.toFormattedDouble() = "%.4f".format(this).toBigDecimal().stripTrailingZeros().toDouble()
 
 fun hideKeyboard(activity: Activity) {
     val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -43,4 +45,14 @@ fun hideKeyboard(activity: Activity) {
     if (imm != null && view != null) {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
+}
+
+fun Double.formatDecimal(): Double {
+    val roundedValue = this.toBigDecimal().setScale(2, RoundingMode.HALF_UP)
+    val formattedValue = if (roundedValue.compareTo(BigDecimal.ZERO) == 0) {
+        BigDecimal.ZERO.toDouble()
+    } else {
+        roundedValue.stripTrailingZeros().toDouble()
+    }
+    return formattedValue
 }

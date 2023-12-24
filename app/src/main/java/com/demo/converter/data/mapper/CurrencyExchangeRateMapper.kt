@@ -1,5 +1,6 @@
 package com.demo.converter.data.mapper
 
+import com.demo.converter.common.extension.toFormattedDouble
 import com.demo.converter.data.local.db.entity.CurrencyExchangeRateLocalEntity
 import com.demo.converter.data.local.db.entity.CurrencyExchangeRateWithNameEntity
 import com.demo.converter.domain.entity.CurrencyExchangeRate
@@ -13,7 +14,7 @@ class CurrencyExchangeRateMapper {
     private fun mapTo(exchangeRateLocalEntity: CurrencyExchangeRateWithNameEntity) = CurrencyExchangeRate(
         exchangeRateLocalEntity.baseCurrencyCode,
         exchangeRateLocalEntity.currencyCode,
-        exchangeRateLocalEntity.exchangeRate,
+        exchangeRateLocalEntity.exchangeRate.toFormattedDouble(),
         exchangeRateLocalEntity.name
     )
 

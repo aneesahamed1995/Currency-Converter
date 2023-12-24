@@ -1,8 +1,8 @@
 package com.demo.converter.di
 
-import com.demo.converter.domain.usecase.GetCurrencyExchangesUseCase
+import com.demo.converter.domain.usecase.CurrencyConversionUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module {
-    factory { GetCurrencyExchangesUseCase(get(),get(DispatcherQualifier.default)) }
+    factory { CurrencyConversionUseCase(get(),get(DispatcherQualifier.default)) }
 }

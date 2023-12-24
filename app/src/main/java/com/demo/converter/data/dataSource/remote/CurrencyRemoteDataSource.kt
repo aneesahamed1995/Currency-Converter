@@ -1,5 +1,6 @@
 package com.demo.converter.data.dataSource.remote
 
+import com.demo.converter.common.AppConstant
 import com.demo.converter.data.mapper.CurrencyMapper
 import com.demo.converter.data.mapper.CurrencyExchangeRateMapper
 import com.demo.converter.data.repository.CurrencyApi
@@ -11,7 +12,7 @@ import kotlinx.coroutines.withContext
 
 interface CurrencyRemoteDataSource {
     suspend fun getCurrencies(): Result<List<Currency>>
-    suspend fun getExchangeRates(baseCurrencyCode:String): Result<List<CurrencyExchangeRate>>
+    suspend fun getBaseExchangeRates(): Result<List<CurrencyExchangeRate>>
 }
 
 class CurrencyRemoteDataSourceImpl(
@@ -23,14 +24,14 @@ class CurrencyRemoteDataSourceImpl(
 
     override suspend fun getCurrencies() = withContext(ioDispatcher){
         when(val result = apiService.getAllCurrencies().execute()){
-            is Result.Success-> Result.Success(currencyMapper.mapTo(result.data.symbols))
+            is Result.Success-> Result.Success(currencyMapper.mapTo(result.data))
             is Result.Failure-> result
         }
     }
 
-    override suspend fun getExchangeRates(baseCurrencyCode: String)= withContext(ioDispatcher){
-        when(val result = apiService.getExchangeRate(baseCurrencyCode).execute()){
-            is Result.Success-> Result.Success(currencyExchangeRateMapper.mapTo(baseCurrencyCode,result.data.rates))
+    override suspend fun getBaseExchangeRates()= withContext(ioDispatcher){
+        when(val result = apiService.getExchangeRate().execute()){
+            is Result.Success-> Result.Success(currencyExchangeRateMapper.mapTo(AppConstant.BaseCurrency.CODE,result.data.rates))
             is Result.Failure-> result
         }
     }

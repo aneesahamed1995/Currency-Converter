@@ -58,7 +58,7 @@ fun provideHttpLoggingInterceptor() = HttpLoggingInterceptor().apply {
 
 fun <T> provideApiService(retrofit: Retrofit,cls: Class<T>) = retrofit.create(cls)
 
-fun provideConvertAdapterFactory() = MoshiConverterFactory.create()
+fun provideConvertAdapterFactory(moshi: Moshi) = MoshiConverterFactory.create(moshi)
 
 fun provideCallAdapterFactory(moshi: Moshi, networkStateManager: NetworkStateManager, ioDispatcher: CoroutineDispatcher) = ResultCallAdapterFactory(moshi,networkStateManager,ioDispatcher)
 

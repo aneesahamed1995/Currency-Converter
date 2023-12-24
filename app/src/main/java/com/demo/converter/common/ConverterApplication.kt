@@ -4,10 +4,12 @@ import android.app.Application
 import android.os.Build
 import com.datatheorem.android.trustkit.TrustKit
 import com.demo.converter.BuildConfig
+import com.demo.converter.di.cacheModule
 import com.demo.converter.di.coroutineModule
 import com.demo.converter.di.dataSourceModule
 import com.demo.converter.di.modelMapperModule
 import com.demo.converter.di.networkModule
+import com.demo.converter.di.preferenceModule
 import com.demo.converter.di.repoModule
 import com.demo.converter.di.roomModule
 import com.demo.converter.di.useCaseModule
@@ -32,7 +34,7 @@ class ConverterApplication:Application() {
             modules(
                 listOf(
                     repoModule, dataSourceModule, viewModelModule, useCaseModule,
-                    networkModule, modelMapperModule, coroutineModule, roomModule
+                    networkModule, modelMapperModule, coroutineModule, roomModule, preferenceModule , cacheModule
                 )
             )
         }

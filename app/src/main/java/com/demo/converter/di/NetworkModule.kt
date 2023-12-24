@@ -13,6 +13,7 @@ import com.demo.converter.data.network.retrofit.provideRetrofit
 import com.demo.converter.data.repository.BankApi
 import com.demo.converter.data.repository.CurrencyApi
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
@@ -41,10 +42,10 @@ val networkModule = module {
     includes(interceptorModule)
     includes(apiServiceModule)
     single<NetworkStateManager> { NetworkStateManagerImpl(androidContext()) }
-    single { Moshi.Builder().build() }
+    single { Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build() }
     factory<OkHttpClient>{ provideOkHttpClient(get(InterceptorQualifier.httpLogging),get(InterceptorQualifier.header)) }
-    factory<Converter.Factory> { provideConvertAdapterFactory() }
+    factory<Converter.Factory> { provideConvertAdapterFactory(get()) }
     factory<CallAdapter.Factory> { provideCallAdapterFactory(get(),get(),get(DispatcherQualifier.io)) }
-    factory { provideBaseUrl() }
+    factory{ provideBaseUrl() }
     single { provideRetrofit(get(),get(),get(),get()) }
 }

@@ -9,5 +9,5 @@ import org.koin.dsl.module
 
 val repoModule = module {
     factory<BankRepository> { BankRepositoryImpl(get()) }
-    factory<CurrencyRepository> { CurrencyRepositoryImpl(get(),get()) }
+    factory<CurrencyRepository> { CurrencyRepositoryImpl(get(),get(),get()) }
 }
