@@ -1,8 +1,7 @@
-package com.demo.converter.view.converter
+package com.demo.converter.view.convertion
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,7 +16,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
@@ -32,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
@@ -41,14 +40,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.demo.converter.R
+import com.demo.converter.common.TestTag
 import com.demo.converter.common.extension.noRippleClickable
+import com.demo.converter.view.common.ProgressBar
 import com.demo.converter.view.model.CurrencyConversionItemUiState
 
 
 @Composable
-fun ConverterScreen(viewModel: ConverterViewModel,onClickBaseCurrency:(baseCode:String)->Unit){
+fun CurrencyConversionScreen(viewModel: ConverterViewModel, onClickBaseCurrency:(baseCode:String)->Unit){
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
-    ConverterScreen(uiState, onInputChanged = { viewModel.updateAmount(it) },onClickBaseCurrency)
+    CurrencyConversionScreen(uiState, onInputChanged = { viewModel.updateAmount(it) },onClickBaseCurrency)
     LaunchedEffect(Unit){
         viewModel.refreshConversion()
         if (viewModel.hasBaseCurrency){
@@ -58,7 +59,7 @@ fun ConverterScreen(viewModel: ConverterViewModel,onClickBaseCurrency:(baseCode:
 }
 
 @Composable
-fun ConverterScreen(uiState:CurrencyConversionUiState,onInputChanged:(amount:Double)->Unit,onClickBaseCurrency:(baseCode:String)->Unit){
+fun CurrencyConversionScreen(uiState:CurrencyConversionUiState, onInputChanged:(amount:Double)->Unit, onClickBaseCurrency:(baseCode:String)->Unit){
     Surface(
         Modifier
             .fillMaxSize()
@@ -85,15 +86,16 @@ fun ConverterScreen(uiState:CurrencyConversionUiState,onInputChanged:(amount:Dou
                                 MaterialTheme.shapes.small
                             )
                             .padding(horizontal = 12.dp, vertical = 8.dp)
-                            .align(Alignment.End).noRippleClickable { onClickBaseCurrency(uiState.baseCurrencyCode) }, verticalAlignment = Alignment.CenterVertically) {
-                        Text(text = uiState.baseCurrencyCode.ifEmpty { stringResource(id = R.string.select) }, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.subtitle1)
+                            .align(Alignment.End)
+                            .noRippleClickable { onClickBaseCurrency(uiState.baseCurrencyCode) }.testTag(TestTag.SELECTED_CURRENCY_CODE), verticalAlignment = Alignment.CenterVertically) {
+                        Text(text = uiState.baseCurrencyCode.ifEmpty { stringResource(id = R.string.select) }, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.subtitle1, modifier = Modifier.testTag(TestTag.SELECTED_CURRENCY_CODE_TEXT))
                         Icon(imageVector = ImageVector.vectorResource(R.drawable.ic_drop_down), modifier = Modifier.padding(start = 8.dp), contentDescription = null)
                     }
                 }
             }
             Box {
                 when{
-                    uiState.exchangeRateUiItems.isNotEmpty()->CurrencyConversionContent(uiState.exchangeRateUiItems)
+                    uiState.conversionUiItems.isNotEmpty()->CurrencyConversionContent(uiState.conversionUiItems)
                     uiState.showExchangeRateLoading-> ProgressBar()
                 }
             }
@@ -103,9 +105,9 @@ fun ConverterScreen(uiState:CurrencyConversionUiState,onInputChanged:(amount:Dou
 
 @Composable
 fun CurrencyConversionContent(uiItems:List<CurrencyConversionItemUiState>){
-    Column(Modifier.fillMaxWidth()) {
+    Column(Modifier.fillMaxWidth().testTag(TestTag.CURRENCY_CONVERSION_LIST)) {
         Text(
-            text = "Currencies",
+            text = stringResource(R.string.currencies),
             modifier = Modifier.padding(start = 16.dp, top = 16.dp),
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colors.onSurface,
@@ -143,29 +145,9 @@ private fun CurrencyItem(uiItem:CurrencyConversionItemUiState){
     }
 }
 
-@Composable
-private fun ProgressBar() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ){
-        CircularProgressIndicator()
-    }
-}
-
-@Composable
-fun EmptyStateMessage(message:String) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ){
-        Text(text = message, color = MaterialTheme.colors.onSurface)
-    }
-}
-
 @Preview(showSystemUi = true)
 @Composable
-private fun ConverterScreenPreView(){
+private fun CurrencyConversionPreView(){
     val items = mutableListOf<CurrencyConversionItemUiState>().also { list->
         repeat(10){
             list.add(CurrencyConversionItemUiState(
@@ -178,7 +160,7 @@ private fun ConverterScreenPreView(){
             ))
         }
     }
-    MaterialTheme { ConverterScreen(CurrencyConversionUiState(exchangeRateUiItems = items),{},{}) }
+    MaterialTheme { CurrencyConversionScreen(CurrencyConversionUiState(conversionUiItems = items),{},{}) }
 }
 
 @Preview

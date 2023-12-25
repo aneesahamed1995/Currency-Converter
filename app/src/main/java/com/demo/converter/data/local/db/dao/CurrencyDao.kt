@@ -4,10 +4,9 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.demo.converter.data.local.db.entity.CurrencyLocalEntity
 import com.demo.converter.data.local.db.entity.CurrencyExchangeRateLocalEntity
 import com.demo.converter.data.local.db.entity.CurrencyExchangeRateWithNameEntity
-import kotlinx.coroutines.flow.Flow
+import com.demo.converter.data.local.db.entity.CurrencyLocalEntity
 
 @Dao
 interface CurrencyDao{

@@ -1,16 +1,7 @@
 package com.demo.converter.common.extension
 
 import android.content.Context
-import android.widget.EditText
 import android.widget.Toast
-import com.demo.converter.common.AppConstant
-
-fun EditText?.getString():String{
-    if(this!=null){
-        return this.text.toString().trim()
-    }
-    return AppConstant.EMPTY
-}
 
 fun Context?.showToast(messageId: Int, length: Int = Toast.LENGTH_SHORT): Toast? {
     return this?.let {

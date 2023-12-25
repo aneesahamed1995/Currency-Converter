@@ -2,15 +2,12 @@ package com.demo.converter.test.presenter
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
-import app.cash.turbine.withTurbineTimeout
 import com.demo.converter.common.BundleProperty
 import com.demo.converter.domain.entity.CurrencyConversion
-import com.demo.converter.domain.entity.CurrencyExchangeRate
 import com.demo.converter.domain.usecase.CurrencyConversionUseCase
 import com.demo.converter.rule.MainCoroutineRule
 import com.demo.converter.rule.koinTestRule
-import com.demo.converter.view.converter.ConverterViewModel
-import kotlinx.coroutines.delay
+import com.demo.converter.view.convertion.ConverterViewModel
 import kotlinx.coroutines.test.runTest
 import org.junit.ClassRule
 import org.junit.Rule
@@ -25,7 +22,6 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.whenever
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
-import kotlin.time.Duration.Companion.milliseconds
 
 class ConverterViewModelTest:KoinTest {
 
@@ -57,7 +53,7 @@ class ConverterViewModelTest:KoinTest {
             viewModel.uiState.test {
                 assert(awaitItem().showExchangeRateLoading)
                 val uiState = awaitItem()
-                assertTrue(uiState.exchangeRateUiItems.isNotEmpty())
+                assertTrue(uiState.conversionUiItems.isNotEmpty())
                 assertFalse(uiState.showExchangeRateLoading)
             }
         }

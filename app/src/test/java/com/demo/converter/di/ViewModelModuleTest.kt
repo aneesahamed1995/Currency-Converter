@@ -1,6 +1,6 @@
 package com.demo.converter.di
 
-import com.demo.converter.view.converter.ConverterViewModel
+import com.demo.converter.view.convertion.ConverterViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

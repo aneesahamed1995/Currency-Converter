@@ -2,7 +2,6 @@ package com.demo.converter.di
 
 import com.demo.converter.data.network.NetworkStateManager
 import com.demo.converter.utils.FakeNetworkStateManager
-import okhttp3.Authenticator
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

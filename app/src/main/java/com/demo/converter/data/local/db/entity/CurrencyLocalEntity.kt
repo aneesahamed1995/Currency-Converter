@@ -8,7 +8,7 @@ import com.demo.converter.data.local.db.DbConstant
 
 @Entity(tableName = DbConstant.TableName.CURRENCY)
 data class CurrencyLocalEntity(
-    @PrimaryKey @ColumnInfo(DbConstant.CurrencyTableColumn.NAME) var name: String = AppConstant.EMPTY,
-    @ColumnInfo(DbConstant.CurrencyTableColumn.CODE) var code: String = AppConstant.EMPTY
+    @PrimaryKey @ColumnInfo(DbConstant.CurrencyTableColumn.NAME) var name: String = AppConstant.STRING_EMPTY,
+    @ColumnInfo(DbConstant.CurrencyTableColumn.CODE) var code: String = AppConstant.STRING_EMPTY
 )
 

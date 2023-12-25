@@ -1,11 +1,10 @@
-package com.demo.converter.view.converter
+package com.demo.converter.view.convertion
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.demo.converter.common.AppConstant
 import com.demo.converter.common.BundleProperty
-import com.demo.converter.domain.repository.CurrencyRepository
 import com.demo.converter.domain.usecase.CurrencyConversionUseCase
 import com.demo.converter.domain.usecase.SyncExchangeRateUseCase
 import com.demo.converter.view.mapper.CurrencyConversionUiItemStateMapper
@@ -26,8 +25,8 @@ import kotlinx.coroutines.launch
 
 data class CurrencyConversionUiState(
     val showExchangeRateLoading:Boolean = false,
-    val exchangeRateUiItems:List<CurrencyConversionItemUiState> = emptyList(),
-    val baseCurrencyCode:String = AppConstant.EMPTY
+    val conversionUiItems:List<CurrencyConversionItemUiState> = emptyList(),
+    val baseCurrencyCode:String = AppConstant.STRING_EMPTY
 )
 
 class ConverterViewModel(
@@ -38,7 +37,7 @@ class ConverterViewModel(
     defaultDispatcher: CoroutineDispatcher
 ) :ViewModel() {
 
-    var baseCurrencyCode:String get() = savedStateHandle.get<String>(BundleProperty.SELECTED_CURRENCY_CODE)?:AppConstant.EMPTY
+    var baseCurrencyCode:String get() = savedStateHandle.get<String>(BundleProperty.SELECTED_CURRENCY_CODE)?:AppConstant.STRING_EMPTY
         set(value) = savedStateHandle.set(BundleProperty.SELECTED_CURRENCY_CODE,value)
 
     val hasBaseCurrency get() = baseCurrencyCode.isNotEmpty()

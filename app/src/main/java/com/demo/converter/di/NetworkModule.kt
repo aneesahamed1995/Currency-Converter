@@ -1,8 +1,8 @@
 package com.demo.converter.di
 
-import com.demo.converter.data.network.retrofit.HeaderInterceptor
 import com.demo.converter.data.network.NetworkStateManager
 import com.demo.converter.data.network.NetworkStateManagerImpl
+import com.demo.converter.data.network.retrofit.HeaderInterceptor
 import com.demo.converter.data.network.retrofit.provideApiService
 import com.demo.converter.data.network.retrofit.provideBaseUrl
 import com.demo.converter.data.network.retrofit.provideCallAdapterFactory
@@ -10,7 +10,6 @@ import com.demo.converter.data.network.retrofit.provideConvertAdapterFactory
 import com.demo.converter.data.network.retrofit.provideHttpLoggingInterceptor
 import com.demo.converter.data.network.retrofit.provideOkHttpClient
 import com.demo.converter.data.network.retrofit.provideRetrofit
-import com.demo.converter.data.repository.BankApi
 import com.demo.converter.data.repository.CurrencyApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -33,7 +32,6 @@ private val interceptorModule = module {
 }
 
 private val apiServiceModule = module {
-    factory<BankApi> { provideApiService(get(),BankApi::class.java) }
     factory<CurrencyApi> { provideApiService(get(),CurrencyApi::class.java) }
 }
 

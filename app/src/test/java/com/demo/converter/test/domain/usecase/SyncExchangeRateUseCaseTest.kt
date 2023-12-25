@@ -7,7 +7,6 @@ import com.demo.converter.domain.entity.error
 import com.demo.converter.domain.entity.isError
 import com.demo.converter.domain.entity.isSuccess
 import com.demo.converter.domain.repository.CurrencyRepository
-import com.demo.converter.domain.usecase.GetCurrencyListUseCase
 import com.demo.converter.domain.usecase.SyncExchangeRateUseCase
 import com.demo.converter.rule.MainCoroutineRule
 import com.demo.converter.rule.koinTestRule

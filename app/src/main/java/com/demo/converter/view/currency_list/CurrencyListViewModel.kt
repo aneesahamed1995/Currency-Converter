@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.demo.converter.common.AppConstant
 import com.demo.converter.domain.entity.Currency
+import com.demo.converter.domain.entity.Error
 import com.demo.converter.domain.entity.error
 import com.demo.converter.domain.entity.isError
 import com.demo.converter.domain.entity.isSuccess
@@ -20,12 +21,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 data class CurrencyListUiState(
-    val selectedCurrencyCode: String = AppConstant.EMPTY,
-    val currencyExchanges:List<CurrencyItemUiState> = emptyList(),
+    val selectedCurrencyCode: String = AppConstant.STRING_EMPTY,
+    val currencyUiItems:List<CurrencyItemUiState> = emptyList(),
     val isLoading:Boolean = false,
     val showProgressDialog:Boolean = false,
     val exchangeRatesSynced:Boolean = false,
-    val errorMessage:String? = null
+    val error: Error? = null
 )
 
 class CurrencyListViewModel(
@@ -46,7 +47,7 @@ class CurrencyListViewModel(
             val currencies = getCurrencyListUseCase.execute()
             _uiState.update {
                 it.copy(
-                    currencyExchanges = getCurrencyUiItems(currencies),
+                    currencyUiItems = getCurrencyUiItems(currencies),
                     isLoading = false
                 )
             }
@@ -61,7 +62,7 @@ class CurrencyListViewModel(
                 selectedCurrencyCode = currencyCode,
                 exchangeRatesSynced = syncResult.isSuccess,
                 showProgressDialog = false,
-                errorMessage = takeIf { syncResult.isError }?.let { syncResult.error.errorMessage }
+                error = takeIf { syncResult.isError }?.let { syncResult.error }
             )
             }
         }
@@ -69,7 +70,7 @@ class CurrencyListViewModel(
 
     fun errorMessageShown(){
         _uiState.update {
-            it.copy(errorMessage = null)
+            it.copy(error = null)
         }
     }
 

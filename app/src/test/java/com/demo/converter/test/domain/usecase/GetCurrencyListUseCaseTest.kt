@@ -1,9 +1,7 @@
 package com.demo.converter.test.domain.usecase
 
 import com.demo.converter.domain.entity.Currency
-import com.demo.converter.domain.entity.CurrencyExchangeRate
 import com.demo.converter.domain.repository.CurrencyRepository
-import com.demo.converter.domain.usecase.CurrencyConversionUseCase
 import com.demo.converter.domain.usecase.GetCurrencyListUseCase
 import com.demo.converter.rule.MainCoroutineRule
 import com.demo.converter.rule.koinTestRule

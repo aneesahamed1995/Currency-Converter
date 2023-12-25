@@ -9,7 +9,6 @@ import com.demo.converter.domain.entity.value
 import com.demo.converter.rule.MainCoroutineRule
 import com.demo.converter.rule.MockWebServerRule
 import com.demo.converter.rule.koinTestRule
-import com.demo.converter.test.repository.CurrencyRepositoryTest
 import com.demo.converter.utils.setResponsePath
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest

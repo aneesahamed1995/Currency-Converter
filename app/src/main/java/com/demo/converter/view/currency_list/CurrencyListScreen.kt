@@ -14,11 +14,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.RadioButton
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -26,17 +23,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.demo.converter.R
-import com.demo.converter.common.extension.isNotNullOrEmpty
-import com.demo.converter.common.extension.showToast
+import com.demo.converter.common.TestTag
+import com.demo.converter.view.common.AppProgressDialog
+import com.demo.converter.view.common.ProgressBar
+import com.demo.converter.view.common.showErrorMessage
 import com.demo.converter.view.model.CurrencyItemUiState
 
 @Composable
@@ -53,8 +51,8 @@ fun CurrencyListScreen(viewModel: CurrencyListViewModel, onSelectedCurrencyItem:
             onSelectedCurrencyItem(uiState.selectedCurrencyCode)
         }
     }
-    if (uiState.errorMessage.isNotNullOrEmpty()){
-        LocalContext.current.showToast(uiState.errorMessage)
+    if (uiState.error != null){
+        showErrorMessage(LocalContext.current,uiState.error)
         viewModel.errorMessageShown()
     }
 }
@@ -68,7 +66,7 @@ fun CurrencyListScreen(uiState:CurrencyListUiState, onClickCurrencyItem:(item:Cu
             .background(color = MaterialTheme.colors.background)
     ){
         when{
-            uiState.currencyExchanges.isNotEmpty()-> CurrencyListScreen(uiState.currencyExchanges,onClickCurrencyItem)
+            uiState.currencyUiItems.isNotEmpty()-> CurrencyListScreen(uiState.currencyUiItems,onClickCurrencyItem)
             uiState.isLoading-> ProgressBar()
             else-> EmptyStateMessage(message = stringResource(id = R.string.no_currencies_available))
         }
@@ -81,7 +79,7 @@ fun CurrencyListScreen(uiState:CurrencyListUiState, onClickCurrencyItem:(item:Cu
 
 @Composable
 fun CurrencyListScreen(currencyUiItems:List<CurrencyItemUiState>, onClickCurrencyItem:(item:CurrencyItemUiState)->Unit){
-    LazyColumn(contentPadding = PaddingValues(all = 16.dp),verticalArrangement = Arrangement.spacedBy(8.dp)){
+    LazyColumn(contentPadding = PaddingValues(all = 16.dp),verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.testTag(TestTag.CURRENCY_LIST)){
         items(items  = currencyUiItems){ item->
             CurrencyUiItem(item,onClickCurrencyItem)
         }
@@ -93,7 +91,7 @@ fun CurrencyUiItem(currencyUiItem: CurrencyItemUiState, onClickCurrencyItem:(ite
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onClickCurrencyItem(currencyUiItem) },
+            .clickable { onClickCurrencyItem(currencyUiItem) }.testTag(TestTag.CURRENCY_ITEM),
         elevation = 2.dp,
         shape = MaterialTheme.shapes.small,
         backgroundColor = MaterialTheme.colors.surface
@@ -113,38 +111,12 @@ fun CurrencyUiItem(currencyUiItem: CurrencyItemUiState, onClickCurrencyItem:(ite
 }
 
 @Composable
-private fun ProgressBar() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ){
-        CircularProgressIndicator()
-    }
-}
-
-@Composable
 fun EmptyStateMessage(message:String) {
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().testTag(TestTag.EMPTY_STATE),
         contentAlignment = Alignment.Center
     ){
         Text(text = message, color = MaterialTheme.colors.onSurface)
-    }
-}
-
-@Composable
-fun AppProgressDialog(title:String){
-    Dialog(onDismissRequest = { }, DialogProperties(false, false)) {
-        Surface(color = MaterialTheme.colors.surface, modifier = Modifier
-            .fillMaxWidth()) {
-            Row(verticalAlignment = Alignment.CenterVertically,modifier = Modifier.fillMaxWidth()) {
-                CircularProgressIndicator(
-                    Modifier
-                        .padding(start = 20.dp, end = 16.dp, top = 20.dp, bottom = 20.dp)
-                        .size(40.dp),MaterialTheme.colors.primary,4.dp)
-                Text(text = title, style = MaterialTheme.typography.subtitle2, color = MaterialTheme.colors.onSurface)
-            }
-        }
     }
 }
 

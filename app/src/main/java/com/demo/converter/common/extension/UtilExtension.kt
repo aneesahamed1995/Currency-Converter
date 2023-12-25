@@ -1,24 +1,14 @@
 package com.demo.converter.common.extension
 
-import android.app.Activity
-import android.content.Context
-import android.view.inputmethod.InputMethodManager
 import com.demo.converter.common.AppConstant
-import java.math.BigDecimal
-import java.math.RoundingMode
-import java.text.DecimalFormat
-import java.text.DecimalFormatSymbols
 import java.util.Date
-import java.util.Locale
 
-val String.EMPTY get() = ""
 
 fun String?.isNotNullOrEmpty() = !this.isNullOrEmpty()
 
-
 inline fun <reified T>Any?.getOrDefault(): T{
     return when(T::class){
-        String::class-> this as? T?: AppConstant.EMPTY as T
+        String::class-> this as? T?: AppConstant.STRING_EMPTY as T
         Int::class-> this as? T?:0 as T
         Double::class-> this as? T?:0.0 as T
         Long::class-> this as? T?:0L as T
@@ -29,30 +19,4 @@ inline fun <reified T>Any?.getOrDefault(): T{
     }
 }
 
-
-fun String?.toSafeDouble() = try {
-    if (this.isNotNullOrEmpty()){
-        this!!.toDouble()
-    }
-    else 0.0
-}catch (ex:Exception){ 0.0 }
-
 fun Double.toFormattedDouble() = "%.4f".format(this).toBigDecimal().stripTrailingZeros().toDouble()
-
-fun hideKeyboard(activity: Activity) {
-    val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    val view = activity.currentFocus
-    if (imm != null && view != null) {
-        imm.hideSoftInputFromWindow(view.windowToken, 0)
-    }
-}
-
-fun Double.formatDecimal(): Double {
-    val roundedValue = this.toBigDecimal().setScale(2, RoundingMode.HALF_UP)
-    val formattedValue = if (roundedValue.compareTo(BigDecimal.ZERO) == 0) {
-        BigDecimal.ZERO.toDouble()
-    } else {
-        roundedValue.stripTrailingZeros().toDouble()
-    }
-    return formattedValue
-}
