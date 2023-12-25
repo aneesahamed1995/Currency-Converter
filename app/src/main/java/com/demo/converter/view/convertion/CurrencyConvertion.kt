@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -68,10 +69,12 @@ fun CurrencyConversionScreen(uiState:CurrencyConversionUiState, onInputChanged:(
             Card(Modifier.fillMaxWidth(), elevation = 2.dp, shape = MaterialTheme.shapes.medium.copy(bottomEnd = CornerSize(16.dp), bottomStart = CornerSize(16.dp))) {
                 Column(Modifier.padding(16.dp)) {
                     var fieldInput by rememberSaveable { mutableStateOf("") }
-                    OutlinedTextField(value = fieldInput, onValueChange = {
-                        val filteredInput = it.filter { char -> char.isDigit() || (char == '.' && !fieldInput.contains('.')) }
-                        fieldInput = filteredInput
-                        onInputChanged((filteredInput.ifEmpty { "0.0" }).toDouble())
+                    val pattern = remember { Regex("^\\d*\\.?\\d*\$") }
+                    OutlinedTextField(value = fieldInput, onValueChange = { text->
+                        if (text.trim().isEmpty() || !(text.length == 1 && text == ".") && text.matches(pattern)){
+                            fieldInput = text
+                            onInputChanged((fieldInput.ifEmpty { "0.0" }).toDouble())
+                        }
                     },
                         textStyle = MaterialTheme.typography.h5.copy(fontWeight = FontWeight.Bold, textAlign = TextAlign.Center),
                         modifier = Modifier.fillMaxWidth(),

@@ -20,11 +20,6 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class com.demo.converter.view.model.CurrencyExchangeUiState{*;}
--keep class com.demo.converter.domain.entity.** {*;}
--keep class com.demo.converter.data.network.response** {*;}
-
-
 # Add project specific ProGuard rules here.
 # You can control the set of applied configuration files using the
 # proguardFiles setting in build.gradle.
@@ -218,6 +213,10 @@
 -keep class com.google.gson.stream.** { *; }
 -dontwarn com.google.gson.**
 
+-keep class com.demo.converter.view.model.CurrencyExchangeUiState{*;}
+-keep class com.demo.converter.domain.entity.** {*;}
+-keep class com.demo.converter.data.network.response** {*;}
+
 #-keep class * implements com.google.gson.TypeAdapterFactory
 #-keep class * implements com.google.gson.JsonSerializer
 #-keep class * implements com.google.gson.JsonDeserializer
@@ -248,7 +247,6 @@
 -keep class com.squareup.okhttp.** { *; }
 -keep interface com.squareup.okhttp.** { *; }
 -dontwarn com.squareup.okhttp.**
--dontwarn com.jakewharton.picasso.**
 
 # Otto
 -keepclassmembers class ** {
