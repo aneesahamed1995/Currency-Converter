@@ -1,7 +1,6 @@
 package com.demo.converter.data.repository
 
 import com.demo.converter.data.network.ApiEndPoint
-import com.demo.converter.data.network.response.CurrencyListResponse
 import com.demo.converter.data.network.response.ExchangeRateResponse
 import com.demo.converter.data.network.retrofit.ResultCall
 import com.demo.converter.data.network.response.BankDetailResponse
@@ -18,5 +17,5 @@ interface CurrencyApi{
     fun getAllCurrencies():ResultCall<Map<String,String>>
 
     @GET(ApiEndPoint.GET_EXCHANGE_RATE)
-    fun getExchangeRate():ResultCall<ExchangeRateResponse>
+    fun getBaseExchangeRate():ResultCall<ExchangeRateResponse>
 }

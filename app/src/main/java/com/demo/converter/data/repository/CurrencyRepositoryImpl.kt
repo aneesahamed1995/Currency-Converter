@@ -37,7 +37,7 @@ class CurrencyRepositoryImpl(
                     currencyLocalDataSource.setExchangeRateSyncedTime(System.currentTimeMillis())
                     Result.Success(Unit)
                 }
-                is Result.Failure->result
+                is Result.Failure-> takeIf { getExchangeRates(currencyCode).isNotEmpty() }?.let { Result.Success(Unit) }?:result
             }
         }
         else {
@@ -47,9 +47,9 @@ class CurrencyRepositoryImpl(
         }
     }
 
-    override suspend fun getExchangeRates(baseCurrency: String):List<CurrencyExchangeRate>{
-        return currencyCacheDataSource.getExchangeRates(baseCurrency).ifEmpty {
-            currencyLocalDataSource.getExchangeRates(baseCurrency).also {
+    override suspend fun getExchangeRates(currencyCode: String):List<CurrencyExchangeRate>{
+        return currencyCacheDataSource.getExchangeRates(currencyCode).ifEmpty {
+            currencyLocalDataSource.getExchangeRates(currencyCode).also {
                 currencyCacheDataSource.setExchangeRates(it)
             }
         }

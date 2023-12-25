@@ -7,6 +7,7 @@ import com.demo.converter.common.AppConstant
 import com.demo.converter.common.BundleProperty
 import com.demo.converter.domain.repository.CurrencyRepository
 import com.demo.converter.domain.usecase.CurrencyConversionUseCase
+import com.demo.converter.domain.usecase.SyncExchangeRateUseCase
 import com.demo.converter.view.mapper.CurrencyConversionUiItemStateMapper
 import com.demo.converter.view.model.CurrencyConversionItemUiState
 import kotlinx.coroutines.CoroutineDispatcher
@@ -17,7 +18,6 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
@@ -32,10 +32,10 @@ data class CurrencyConversionUiState(
 
 class ConverterViewModel(
     private val savedStateHandle: SavedStateHandle,
-    private val currencyRepository: CurrencyRepository,
+    private val syncExchangeRateUseCase: SyncExchangeRateUseCase,
     private val currencyConversionUseCase: CurrencyConversionUseCase,
     private val uiItemStateMapper: CurrencyConversionUiItemStateMapper ,
-    private val defaultDispatcher: CoroutineDispatcher
+    defaultDispatcher: CoroutineDispatcher
 ) :ViewModel() {
 
     var baseCurrencyCode:String get() = savedStateHandle.get<String>(BundleProperty.SELECTED_CURRENCY_CODE)?:AppConstant.EMPTY
@@ -50,7 +50,7 @@ class ConverterViewModel(
         .debounce(500)
         .distinctUntilChanged()
         .mapLatest { currencyConversionUseCase.execute(baseCurrencyCode,_uiState.value) }
-        .mapLatest { it.toMutableList().also { it.removeIf { it.code == baseCurrencyCode } } }
+        .mapLatest { it.toMutableList().also { items-> items.removeAll { item->item.code == baseCurrencyCode } } }
         .mapLatest { CurrencyConversionUiState(false,uiItemStateMapper.mapTo(it),baseCurrencyCode) }
         .flowOn(defaultDispatcher)
         .stateIn(
@@ -69,7 +69,7 @@ class ConverterViewModel(
 
     fun syncCurrentExchangeRate(){
         viewModelScope.launch {
-            currencyRepository.syncExchangeRates(baseCurrencyCode)
+            syncExchangeRateUseCase.execute(baseCurrencyCode)
         }
     }
 }

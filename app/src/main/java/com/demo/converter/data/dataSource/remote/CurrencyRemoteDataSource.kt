@@ -30,7 +30,7 @@ class CurrencyRemoteDataSourceImpl(
     }
 
     override suspend fun getBaseExchangeRates()= withContext(ioDispatcher){
-        when(val result = apiService.getExchangeRate().execute()){
+        when(val result = apiService.getBaseExchangeRate().execute()){
             is Result.Success-> Result.Success(currencyExchangeRateMapper.mapTo(AppConstant.BaseCurrency.CODE,result.data.rates))
             is Result.Failure-> result
         }

@@ -7,7 +7,8 @@ import com.demo.converter.domain.entity.Currency
 import com.demo.converter.domain.entity.error
 import com.demo.converter.domain.entity.isError
 import com.demo.converter.domain.entity.isSuccess
-import com.demo.converter.domain.repository.CurrencyRepository
+import com.demo.converter.domain.usecase.GetCurrencyListUseCase
+import com.demo.converter.domain.usecase.SyncExchangeRateUseCase
 import com.demo.converter.view.mapper.CurrencyItemUiStateMapper
 import com.demo.converter.view.model.CurrencyItemUiState
 import kotlinx.coroutines.CoroutineDispatcher
@@ -29,7 +30,8 @@ data class CurrencyListUiState(
 
 class CurrencyListViewModel(
     private val selectedCurrencyCode:String,
-    private val currencyRepository: CurrencyRepository,
+    private val getCurrencyListUseCase: GetCurrencyListUseCase,
+    private val syncExchangeRateUseCase: SyncExchangeRateUseCase,
     private val currencyItemUiStateMapper: CurrencyItemUiStateMapper,
     private val defaultDispatcher: CoroutineDispatcher
 ) :ViewModel() {
@@ -41,7 +43,7 @@ class CurrencyListViewModel(
 
     fun getCurrencies(){
         viewModelScope.launch {
-            val currencies = currencyRepository.getCurrencies()
+            val currencies = getCurrencyListUseCase.execute()
             _uiState.update {
                 it.copy(
                     currencyExchanges = getCurrencyUiItems(currencies),
@@ -54,7 +56,7 @@ class CurrencyListViewModel(
     fun getExchangeRates(currencyCode:String){
         viewModelScope.launch {
             _uiState.update { it.copy(showProgressDialog = true) }
-            val syncResult = currencyRepository.syncExchangeRates(currencyCode)
+            val syncResult = syncExchangeRateUseCase.execute(currencyCode)
             _uiState.update { it.copy(
                 selectedCurrencyCode = currencyCode,
                 exchangeRatesSynced = syncResult.isSuccess,

@@ -18,7 +18,7 @@ class CurrencyCacheDataSourceImpl(private val currencyListCache: CurrencyListCac
         if (currencyListCache.hasCache && currencyListCache.baseCurrencyCode == currencyCode){
             currencyListCache.exchangeRates!!
         }
-        else emptyList<CurrencyExchangeRate>()
+        else emptyList()
     }
 
     override suspend fun setExchangeRates(exchangeRates: List<CurrencyExchangeRate>) = cacheLock.withLock {

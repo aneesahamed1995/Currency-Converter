@@ -9,5 +9,5 @@ import org.koin.dsl.module
 val viewModelModule = module {
     viewModel { ToolbarViewModel() }
     viewModel { ConverterViewModel(get(),get(),get(),get(),get(DispatcherQualifier.default)) }
-    viewModel { parameters-> CurrencyListViewModel(selectedCurrencyCode = parameters.get(),get(),get(),get(DispatcherQualifier.default)) }
+    viewModel { parameters-> CurrencyListViewModel(selectedCurrencyCode = parameters.get(),get(),get(),get(),get(DispatcherQualifier.default)) }
 }
